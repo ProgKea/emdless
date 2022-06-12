@@ -1,9 +1,7 @@
 extern crate ncurses;
 
 use ncurses::*;
-use std::env;
-use std::fs;
-use std::path::Path;
+use std::{env, fs, path::Path};
 use strip_markdown::strip_markdown;
 
 fn read_markdown_file() -> String {
@@ -110,6 +108,12 @@ impl Pager {
         }
     }
 
+    pub fn select_all(&mut self) {
+        for item in self.items.iter_mut() {
+            item.show_child = true;
+        }
+    }
+
     pub fn go_up(&mut self) {
         if self.index > 1 {
             self.index -= 1;
@@ -153,6 +157,7 @@ fn main() {
             'j' => pager.go_down(),
             '\n' => pager.select_item(),
             ' ' => pager.unselect_all(),
+            '\t' => pager.select_all(),
             _ => {}
         }
     }
