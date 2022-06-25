@@ -155,9 +155,9 @@ fn main() {
             'q' => break,
             'k' => pager.go_up(),
             'j' => pager.go_down(),
-            '\n' => pager.select_item(),
+            '\t' => pager.select_item(),
             ' ' => pager.unselect_all(),
-            '\t' => pager.select_all(),
+            '\n' => pager.select_all(),
             _ => {}
         }
     }
